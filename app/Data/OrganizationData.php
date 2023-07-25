@@ -26,7 +26,7 @@ class OrganizationData extends Data
         return 'Inactive'=== $this->field_org_status;
     }
 
-    public function resolveCategory(): Model|Category
+    public function resolveCategory(): Category
     {
         if ($this->isOrganizationInactive()) {
             return $this->inactiveCategory();
@@ -35,7 +35,7 @@ class OrganizationData extends Data
         return Category::firstOrCreate(['label' => $this->field_organization_type]);
     }
 
-    protected function inactiveCategory()
+    protected function inactiveCategory(): Category
     {
         return Category::firstOrCreate(['label' => 'Inactive'], ['label' => 'Inactive']);
     }
